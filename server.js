@@ -2,33 +2,59 @@
 
 const express = require('express');
 const { savedNotes } = require('./db/db.json');
+const uuid = require('uuid');
+const path = require('path');
+const fs = require('fs');
+const app = express();
+app.use(express.json());
+app.use(require('body-parser').urlencoded({extended:true}));
 
 // HTML routes
 
 // To return notes.html file
 app.get('/notes', (req,res) => {
-    res.sendFile(path.join(__dirname, './notes.html'));
+    res.sendFile(path.join(__dirname, './public/notes.html'));
 });
 
-// To return index.html file
-app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, './index.html'));
-});
 
 // API ROUTES
 
 // To read db.json file and return all saved notes as JSON
 app.get('/api/notes', (req, res) => {
-    let results = savedNotes;
-    if (req.query) {
-        results = filterByQuery(req.query, results);
-    }
-    res.json(results);
+    
+    res.json(savedNotes);
 });
 
 // To receive a new note to save on the request body, add to db.json file, and return new note to client
-// Need to find a way to give each note a unique ID when it's saved (npm package)
 app.post('/api/notes', (req, res) => {
     // set id here, add to db.json, return to client
- 
+    // res.send(req.body);
+    console.log(req.body);
+    const newNote = {
+        id: uuid.v4(),
+        title: req.body.title,
+        text: req.body.text
+    } // push new note
+    if (!newNote.title) {
+        return res.status(400).send('Please enter a title for your note');
+    }
+    savedNotes.push(newNote);
+    fs.writeFile('./db/db.json', JSON.stringify(savedNotes),(err,data)=> {
+        if(err)
+        res.status(400).json({success:false});
+
+        JSON.stringify({ savedNotes }, null, 2);
+        res.json(newNote);
+
+    });
+
 });
+
+// To return index.html file
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
+
+// setting the PORT and PORT testing
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
