@@ -8,6 +8,7 @@ const fs = require('fs');
 const app = express();
 app.use(express.json());
 app.use(require('body-parser').urlencoded({extended:true}));
+app.use(express.static('public'))
 
 // HTML routes
 
@@ -66,7 +67,7 @@ app.delete('/notes/:id', (req, res) => {
 });
 
 
-// To return index.html file
+// // To return index.html file
 app.get('*', (req,res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
