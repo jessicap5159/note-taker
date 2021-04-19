@@ -35,10 +35,12 @@ app.post('/api/notes', (req, res) => {
         title: req.body.title,
         text: req.body.text
     } // push new note
+   
     if (!newNote.title) {
         return res.status(400).send('Please enter a title for your note');
     }
     savedNotes.push(newNote);
+  
     fs.writeFile('./db/db.json', JSON.stringify(savedNotes),(err,data)=> {
         if(err)
         res.status(400).json({success:false});
