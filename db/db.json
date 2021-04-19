@@ -1,1 +1,34 @@
-[{"id":"c474b2c5-77d4-448f-a57a-2a051770d456","title":"Detention with Umbridge","text":"Detention every night might from 9-12"},{"id":"40d14494-52d4-429a-a6c5-17841a6cf49e","title":"Go to the store","text":"Buy food"}]
+{
+  "savedNotes": [
+    {
+      "id": "c474b2c5-77d4-448f-a57a-2a051770d456",
+      "title": "Detention with Umbridge",
+      "text": "Detention every night might from 9-12"
+    },
+    {
+      "id": "828a886c-8c22-4766-b315-d72b3f22e715",
+      "title": "work with Jessica",
+      "text": "finish challenge"
+    },
+    {
+      "id": "a41b42c9-11cd-4dab-98fd-deac00570906",
+      "title": "check it out",
+      "text": "finish challenge"
+    },
+    {
+      "id": "eb4f6b28-6c2d-4ecc-8f59-fb357db844c4",
+      "title": "testing",
+      "text": "ugh"
+    },
+    {
+      "id": "dedc195d-f545-456a-a0d2-ba9122eb83b3",
+      "title": "Eat an apple",
+      "text": "Now"
+    },
+    {
+      "id": "684e12f8-e3f6-4200-a593-3201b3474e3f",
+      "title": "Eat an apple",
+      "text": "Tomorrow"
+    }
+  ]
+}

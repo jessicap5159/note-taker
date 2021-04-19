@@ -8,7 +8,7 @@ const fs = require('fs');
 const app = express();
 app.use(express.json());
 app.use(require('body-parser').urlencoded({extended:true}));
-savedNotes = [];
+
 // HTML routes
 
 // To return notes.html file
@@ -29,27 +29,24 @@ app.get('/api/notes', (req, res) => {
 app.post('/api/notes', (req, res) => {
     // set id here, add to db.json, return to client
     // res.send(req.body);
-    console.log(req.body);
+    res.send(req.body);
     const newNote = {
         id: uuid.v4(),
         title: req.body.title,
         text: req.body.text
-    } // push new note
-   
-    if (!newNote.title) {
-        return res.status(400).send('Please enter a title for your note');
     }
+    // making sure each note includes a title
+    if (!newNote.title) {
+        return res.status(400).send("Please include a title for your note.");
+    }
+    // adding the new note to the json file
     savedNotes.push(newNote);
-  
-    fs.writeFile('./db/db.json', JSON.stringify(savedNotes),(err,data)=> {
-        if(err)
-        res.status(400).json({success:false});
-
-        JSON.stringify({ savedNotes }, null, 2);
-        res.json(newNote);
-
-    });
-
+    fs.writeFileSync(
+        path.join(__dirname, './db/db.json'),
+        JSON.stringify({ savedNotes }, null, 2)
+    );
+    console.log(savedNotes);
+    return newNote;
 });
 
 // Delete a note
