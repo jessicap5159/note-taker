@@ -50,21 +50,6 @@ app.post('/api/notes', (req, res) => {
     return newNote;
 });
 
-// Delete a note
-app.delete('/notes/:id', (req, res) => {
-    const found = notes.some(note => note.id === req.params.id);
-    if (!found) {
-        res.status(400).send("Note not found");
-    } else {
-        console.log("note deleted!")
-        res.json(notes = notes.filter(note => note.id !== req.params.id));
-        console.log(notes);
-        fs.writeFileSync(
-            path.join(__dirname, './db/db.json'),
-            JSON.stringify({ notes }, null, 2)
-        );
-    }
-});
 
 
 // // To return index.html file
