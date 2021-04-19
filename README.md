@@ -14,13 +14,13 @@ This is a web application that allows the user to write and save notes to keep t
 
 ## Installation
 Instructions:
-Click the URL here
+Click the URL [here] (https://infinite-plains-29071.herokuapp.com/).
 
 ## Usage
-
+Simply click the link above, click "Get Started", and then click "Note Title" to start writing a new note. Alternatively, you can click on the pencil icon in the top right corner. To view previous notes, see the column on the left-hand side, and click on the note to view it. 
 
 ## Credits
-Many thanks to Megan Close and John Baxter.
+Many thanks to Megan Close, John Baxter, and the people at the AskBCS Learning Assistant. Also markdownguide.org.
 
 ## License
 Project covered under MIT license: choosealicense.com/licenses/mit
