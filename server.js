@@ -1,7 +1,7 @@
 // Variables
 
 const express = require('express');
-const { savedNotes } = require('./db/db.json');
+const { notes } = require('./db/db.json');
 const uuid = require('uuid');
 const path = require('path');
 const fs = require('fs');
@@ -22,7 +22,7 @@ app.get('/notes', (req,res) => {
 // To read db.json file and return all saved notes as JSON
 app.get('/api/notes', (req, res) => {
     
-    res.json(savedNotes);
+    res.json(notes);
 });
 
 // To receive a new note to save on the request body, add to db.json file, and return new note to client
@@ -40,27 +40,27 @@ app.post('/api/notes', (req, res) => {
         return res.status(400).send("Please include a title for your note.");
     }
     // adding the new note to the json file
-    savedNotes.push(newNote);
+    notes.push(newNote);
     fs.writeFileSync(
         path.join(__dirname, './db/db.json'),
-        JSON.stringify({ savedNotes }, null, 2)
+        JSON.stringify({ notes }, null, 2)
     );
-    console.log(savedNotes);
+    console.log(notes);
     return newNote;
 });
 
 // Delete a note
 app.delete('/notes/:id', (req, res) => {
-    const found = savedNotes.some(note => note.id === req.params.id);
+    const found = notes.some(note => note.id === req.params.id);
     if (!found) {
         res.status(400).send("Note not found");
     } else {
         console.log("note deleted!")
-        res.json(savedNotes = savedNotes.filter(note => note.id !== req.params.id));
-        console.log(savedNotes);
+        res.json(notes = notes.filter(note => note.id !== req.params.id));
+        console.log(notes);
         fs.writeFileSync(
             path.join(__dirname, '../../db/db.json'),
-            JSON.stringify({ savedNotes }, null, 2)
+            JSON.stringify({ notes }, null, 2)
         );
     }
 });
