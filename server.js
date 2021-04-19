@@ -8,7 +8,7 @@ const fs = require('fs');
 const app = express();
 app.use(express.json());
 app.use(require('body-parser').urlencoded({extended:true}));
-
+savedNotes = [];
 // HTML routes
 
 // To return notes.html file
