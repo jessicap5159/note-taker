@@ -50,6 +50,23 @@ app.post('/api/notes', (req, res) => {
 
 });
 
+// Delete a note
+router.delete('/notes/:id', (req, res) => {
+    const found = savedNotes.some(note => note.id === req.params.id);
+    if (!found) {
+        res.status(400).send("Note not found");
+    } else {
+        console.log("note deleted!")
+        res.json(savedNotes = savedNotes.filter(note => note.id !== req.params.id));
+        console.log(savedNotes);
+        fs.writeFileSync(
+            path.join(__dirname, '../../db/db.json'),
+            JSON.stringify({ savedNotes }, null, 2)
+        );
+    }
+});
+
+
 // To return index.html file
 app.get('*', (req,res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
