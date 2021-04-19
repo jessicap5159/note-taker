@@ -51,7 +51,7 @@ app.post('/api/notes', (req, res) => {
 });
 
 // Delete a note
-router.delete('/notes/:id', (req, res) => {
+app.delete('/notes/:id', (req, res) => {
     const found = savedNotes.some(note => note.id === req.params.id);
     if (!found) {
         res.status(400).send("Note not found");
