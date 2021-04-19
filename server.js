@@ -60,7 +60,7 @@ app.delete('/notes/:id', (req, res) => {
         res.json(notes = notes.filter(note => note.id !== req.params.id));
         console.log(notes);
         fs.writeFileSync(
-            path.join(__dirname, '../../db/db.json'),
+            path.join(__dirname, './db/db.json'),
             JSON.stringify({ notes }, null, 2)
         );
     }
